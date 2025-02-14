@@ -73,9 +73,9 @@ linters:
     - testifylint
     - typecheck
     - unconvert
+    - unparam
     - unused
     - usestdlibvars
-    - usetesting
     - usetesting
     - wastedassign
     - whitespace
