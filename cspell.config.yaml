@@ -1,0 +1,23 @@
+---
+files:
+  - "**/*.md"
+
+patterns:
+  - name: markdown_code_block
+    pattern: |
+      /
+          ^\s*```.*
+          [\s\S]*?
+          ^\s*```
+      /gmx
+
+languageSettings:
+  - languageId: markdown
+    ignoreRegExpList:
+      - markdown_code_block
+
+words:
+  - "combin"
+  - "intspec"
+  - "goroutine"
+  - "goroutines"

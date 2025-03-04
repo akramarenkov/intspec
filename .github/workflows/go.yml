@@ -1,4 +1,4 @@
-name: Lint and test
+name: Go
 on:
   push:
     tags:
@@ -37,3 +37,32 @@ jobs:
       - uses: golangci/golangci-lint-action@v6
         with:
           version: v1.64.5
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+      - uses: actions/checkout@v4
+      - run: |
+          for dir in . v[0-9]*;
+          do
+            test "${dir}" == 'v[0-9]*' && continue
+
+            cd "${dir}"
+
+            coverfile="../coverage-${dir}"
+
+            test "${dir}" == '.' && {
+              coverfile="coverage-${dir}"
+            }
+
+            go test -v -coverprofile="${coverfile}" -covermode=atomic -timeout=1h ./...
+
+            test "${dir}" != '.' && cd ..
+          done
+      - uses: coverallsapp/github-action@v2
+        with:
+          files: coverage-*
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
