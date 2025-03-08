@@ -17,7 +17,7 @@ languageSettings:
       - markdown_code_block
 
 words:
-  - "combin"
-  - "intspec"
-  - "goroutine"
-  - "goroutines"
+  - combin
+  - intspec
+  - goroutine
+  - goroutines
