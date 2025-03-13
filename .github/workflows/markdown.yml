@@ -1,4 +1,6 @@
+---
 name: Markdown
+
 on:
   push:
     tags:
@@ -6,8 +8,10 @@ on:
     branches:
       - master
   pull_request:
+
 permissions:
   contents: read
+
 jobs:
   lint:
     runs-on: ubuntu-latest
