@@ -1,0 +1,10 @@
+---
+extends: default
+
+rules:
+  line-length:
+    max: 120 # too little in the current conditions
+  comments:
+    min-spaces-from-content: 1 # why use two spaces?
+  truthy:
+    check-keys: false # for example: "on" key in github workflow
