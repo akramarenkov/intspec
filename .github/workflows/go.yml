@@ -31,6 +31,7 @@ jobs:
 
             test "${dir}" != '.' && cd ..
           done
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -41,6 +42,7 @@ jobs:
       - uses: golangci/golangci-lint-action@v6
         with:
           version: v1.64.5
+
   coverage:
     runs-on: ubuntu-latest
     steps:
