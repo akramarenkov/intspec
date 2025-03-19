@@ -87,7 +87,7 @@ linters-settings:
     enable-all: true
     disable:
       - shadow # causes too many false positives
-      - fieldalignment # needs to be enabled in the future
+      - fieldalignment # creates a lot of irrelevant remarks
   gci:
     sections:
       - standard
@@ -97,11 +97,8 @@ linters-settings:
   gocritic:
     enable-all: true
     disabled-checks:
-      - unnamedResult # conflicts with nonamedreturns, named returns are more confusing
+      - unnamedResult # named returns are more confusing
       - emptyStringTest # not more idiomatically
-    settings:
-      tooManyResultsChecker:
-        maxResults: 6 # try to decrease in the future
   revive:
     enable-all-rules: true
     rules:
@@ -116,17 +113,17 @@ linters-settings:
       - name: cyclomatic
         disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
       - name: confusing-results
-        disabled: true # conflicts with nonamedreturns, named returns are more confusing
-      - name: unhandled-error
-        arguments:
-          - 'fmt\.Print.*' # error writing to stdout can only be reliably handled by panic
-          - 'bytes\.Buffer\.Write.*' # always returns nil
+        disabled: true # named returns are more confusing
       - name: flag-parameter
         disabled: true # causes too many false positives
       - name: confusing-naming
         disabled: true # needs to be enabled in the future
       - name: function-length
         disabled: true # needs to be enabled in the future
+      - name: unhandled-error
+        arguments:
+          - 'fmt\.Print.*' # Writing errors in stdout and stderr is difficult to report in any way
+          - 'bytes\.Buffer\.Write.*' # always returns nil
       - name: max-control-nesting
         arguments:
           - 6 # try to decrease in the future
