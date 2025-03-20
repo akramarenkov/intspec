@@ -86,8 +86,8 @@ linters-settings:
   govet:
     enable-all: true
     disable:
-      - shadow # causes too many false positives
       - fieldalignment # creates a lot of irrelevant remarks
+      - shadow # causes too many false positives
   gci:
     sections:
       - standard
@@ -97,42 +97,38 @@ linters-settings:
   gocritic:
     enable-all: true
     disabled-checks:
-      - unnamedResult # named returns are more confusing
       - emptyStringTest # not more idiomatically
+      - unnamedResult # named returns are more confusing
   revive:
     enable-all-rules: true
     rules:
       - name: add-constant
         disabled: true # mnd is used instead
-      - name: line-length-limit
-        disabled: true # lll is used instead
       - name: cognitive-complexity
+        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
+      - name: confusing-naming
+        disabled: true # needs to be enabled in the future
+      - name: confusing-results
+        disabled: true # named returns are more confusing
+      - name: cyclomatic
+        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
+      - name: flag-parameter
+        disabled: true # causes too many false positives
+      - name: function-length
         disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
       - name: function-result-limit
         disabled: true # gocritic is used instead
-      - name: cyclomatic
-        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
-      - name: confusing-results
-        disabled: true # named returns are more confusing
-      - name: flag-parameter
-        disabled: true # causes too many false positives
-      - name: confusing-naming
-        disabled: true # needs to be enabled in the future
-      - name: function-length
-        disabled: true # needs to be enabled in the future
-      - name: unhandled-error
-        arguments:
-          - 'fmt\.Print.*' # Writing errors in stdout and stderr is difficult to report in any way
-          - 'bytes\.Buffer\.Write.*' # always returns nil
+      - name: line-length-limit
+        disabled: true # lll is used instead
       - name: max-control-nesting
-        arguments:
-          - 6 # try to decrease in the future
-      - name: max-public-structs
-        arguments:
-          - 8 # try to decrease in the future
+        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
       - name: argument-limit
         arguments:
           - 10 # try to decrease in the future
+      - name: unhandled-error
+        arguments:
+          - 'fmt\.Print.*' # writing errors in stdout and stderr is difficult to report in any way
+          - 'bytes\.Buffer\.Write.*' # always returns nil
 
 issues:
   max-issues-per-linter: 0
