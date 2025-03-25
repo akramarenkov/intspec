@@ -1,4 +1,6 @@
 ---
+version: "2"
+
 linters:
   enable:
     - asasalint
@@ -17,7 +19,6 @@ linters:
     - fatcontext
     - forbidigo
     - forcetypeassert
-    - gci
     - gocheckcompilerdirectives
     - gochecknoglobals
     - gochecknoinits
@@ -28,12 +29,8 @@ linters:
     - gocyclo
     - godot
     - godox
-    - gofmt
     - goheader
-    - goimports
     - gosec
-    - gosimple
-    - gosmopolitan
     - govet
     - grouper
     - iface
@@ -66,12 +63,10 @@ linters:
     - rowserrcheck
     - sqlclosecheck
     - staticcheck
-    - stylecheck
     - tagalign
     - tagliatelle
     - testableexamples
     - testifylint
-    - typecheck
     - unconvert
     - unparam
     - unused
@@ -82,61 +77,78 @@ linters:
     - wsl
     - zerologlint
 
-linters-settings:
-  govet:
-    enable-all: true
-    disable:
-      - fieldalignment # creates a lot of irrelevant remarks
-      - shadow # causes too many false positives
-  gci:
-    sections:
-      - standard
-      - localmodule
-      - default
-    custom-order: true
-  gocritic:
-    enable-all: true
-    disabled-checks:
-      - emptyStringTest # not more idiomatically
-      - unnamedResult # named returns are more confusing
-  revive:
-    enable-all-rules: true
-    rules:
-      - name: add-constant
-        disabled: true # mnd is used instead
-      - name: cognitive-complexity
-        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
-      - name: confusing-naming
-        disabled: true # needs to be enabled in the future
-      - name: confusing-results
-        disabled: true # named returns are more confusing
-      - name: cyclomatic
-        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
-      - name: flag-parameter
-        disabled: true # causes too many false positives
-      - name: function-length
-        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
-      - name: function-result-limit
-        disabled: true # gocritic is used instead
-      - name: line-length-limit
-        disabled: true # lll is used instead
-      - name: max-control-nesting
-        disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
-      - name: argument-limit
-        arguments:
-          - 10 # try to decrease in the future
-      - name: unhandled-error
-        arguments:
-          - 'fmt\.Print.*' # writing errors in stdout and stderr is difficult to report in any way
-          - 'bytes\.Buffer\.Write.*' # always returns nil
+  settings:
+    gocritic:
+      enable-all: true
+      disabled-checks:
+        - emptyStringTest # not more idiomatically
+        - unnamedResult # named returns are more confusing
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment # creates a lot of irrelevant remarks
+        - shadow # causes too many false positives
+    revive:
+      enable-all-rules: true
+      rules:
+        - name: add-constant
+          disabled: true # mnd is used instead
+        - name: cognitive-complexity
+          disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
+        - name: confusing-naming
+          disabled: true # needs to be enabled in the future
+        - name: confusing-results
+          disabled: true # named returns are more confusing
+        - name: cyclomatic
+          disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
+        - name: flag-parameter
+          disabled: true # causes too many false positives
+        - name: function-length
+          disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
+        - name: function-result-limit
+          disabled: true # gocritic is used instead
+        - name: line-length-limit
+          disabled: true # lll is used instead
+        - name: max-control-nesting
+          disabled: true # gocognit, gocyclo, maintidx, nestif is used instead
+        - name: argument-limit
+          arguments:
+            - 10 # try to decrease in the future
+        - name: unhandled-error
+          arguments:
+            - fmt\.Print.* # writing errors in stdout and stderr is difficult to report in any way
+            - bytes\.Buffer\.Write.* # always returns nil
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - goimports
+  settings:
+    gci:
+      sections:
+        - standard
+        - localmodule
+        - default
+      custom-order: true
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
 
 issues:
   max-issues-per-linter: 0
   max-same-issues: 0
-
-output:
-  sort-results: true
-  show-stats: true
-
-run:
-  timeout: 10m
