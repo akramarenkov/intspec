@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestRangeSig(t *testing.T) {
+func TestRangeSigned(t *testing.T) {
 	minimum64, maximum64 := Range[int64]()
 	require.Equal(t, int64(math.MinInt64), minimum64)
 	require.Equal(t, int64(math.MaxInt64), maximum64)
@@ -29,7 +29,7 @@ func TestRangeSig(t *testing.T) {
 	require.Equal(t, math.MaxInt, maximum)
 }
 
-func TestRangeUns(t *testing.T) {
+func TestRangeUnsigned(t *testing.T) {
 	minimum64, maximum64 := Range[uint64]()
 	require.Equal(t, uint64(0), minimum64)
 	require.Equal(t, uint64(math.MaxUint64), maximum64)
@@ -71,25 +71,25 @@ func BenchmarkReference(b *testing.B) {
 	}
 }
 
-func BenchmarkRangeSig(b *testing.B) {
+func BenchmarkRangeSigned(b *testing.B) {
 	for b.Loop() {
 		_, _ = Range[int8]()
 	}
 }
 
-func BenchmarkRangeUns(b *testing.B) {
+func BenchmarkRangeUnsigned(b *testing.B) {
 	for b.Loop() {
 		_, _ = Range[uint8]()
 	}
 }
 
-func BenchmarkBitSizeSig(b *testing.B) {
+func BenchmarkBitSizeSigned(b *testing.B) {
 	for b.Loop() {
 		_ = BitSize[int8]()
 	}
 }
 
-func BenchmarkBitSizeUns(b *testing.B) {
+func BenchmarkBitSizeUnsigned(b *testing.B) {
 	for b.Loop() {
 		_ = BitSize[uint8]()
 	}
