@@ -16,8 +16,8 @@ func ExampleRange() {
 }
 
 func ExampleBitSize() {
-	bisize := intspec.BitSize[int8]()
-	fmt.Println(bisize)
+	size := intspec.BitSize[int8]()
+	fmt.Println(size)
 	// Output:
 	// 8
 }
