@@ -18,7 +18,9 @@ languageSettings:
 
 words:
   - combin
-  - intspec
+  - crdb
   - goroutine
   - goroutines
   - httpw
+  - intspec
+  - psql
