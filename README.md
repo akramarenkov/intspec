@@ -7,7 +7,7 @@
 ## Purpose
 
 Library that provides to detect the parameters of integer types: minimum,
- maximum values ​​and bit size
+ maximum values and bit size
 
 ## Usage
 
