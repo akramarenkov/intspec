@@ -82,7 +82,7 @@ linters:
     - usetesting
     - wastedassign
     - whitespace
-    - wsl
+    - wsl_v5
     - zerologlint
 
   settings:
@@ -126,6 +126,9 @@ linters:
           arguments:
             - fmt\.Print.* # writing errors in stdout and stderr is difficult to report in any way
             - bytes\.Buffer\.Write.* # always returns nil
+        - name: enforce-switch-style
+          arguments:
+            - allowNoDefault
   exclusions:
     generated: lax
     presets:
